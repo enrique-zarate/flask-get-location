@@ -17,15 +17,7 @@ def enviar_ubicacion(lat, long):
     # Construir el mensaje de ubicación
     ubicacion = "geo:{},{}".format(lat, long)
     print(ubicacion)
-    # crear objeto mensaje
-    mensaje = {
-        "body":"Aqui estoy!",
-        "location": {
-            "latitud": lat,
-            "longitud": long
-        }
-    
-    }
+
     # Enviar el mensaje de ubicación a través de Twilio
     message = client.messages.create(
         body=f"Estoy aqui bro: https://www.google.com/maps/search/?api=1&query={lat},{long}",
