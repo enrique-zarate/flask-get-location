@@ -41,6 +41,11 @@ def mi_funcion():
         # Si el navegador no es Google Chrome, el usuario no puede compartir su ubicación.
         return "Lo siento, esta función solo está disponible en Google Chrome."
 
+@app.route("/permiso")
+def permiso():
+    return render_template('solicitar_permiso.html')
+
+
 # hacer la app accesible desde el puerto  en la red local
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8080)
