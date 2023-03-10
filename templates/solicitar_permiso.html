@@ -11,16 +11,32 @@
     </p>
     <button onclick="pedir_permisos()">Permitir acceso a ubicación</button>
     <script>
-      function pedir_permisos() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(ubicacion_exitosa);
-        } else {
-          alert("Tu navegador no soporta geolocalización.");
-        }
-      }
-      function ubicacion_exitosa(posicion) {
-        window.location.href = "/mi_ruta";
-      }
+     function pedir_permisos() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(ubicacion_exitosa);
+  } else {
+    alert("Tu navegador no soporta geolocalización.");
+  }
+}
+
+function ubicacion_exitosa(posicion) {
+  const data = {
+    "latitud": posicion.coords.latitude,
+    "longitud": posicion.coords.longitude
+  };
+
+  fetch('/mi_ruta', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(function(response) {
+    console.log(response);
+  }).catch(function(error) {
+    console.log(error);
+  });
+}
     </script>
   </body>
 </html>
