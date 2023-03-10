@@ -27,13 +27,21 @@ def location():
         return "La aplicación no tiene permiso para acceder a la ubicación", 403
     
 
-@app.route('/mi_ruta')
+@app.route('/mi_ruta', methods=['POST'])
 def mi_funcion():
     if request.headers.get('sec-ch-ua') and 'Google' in request.headers['sec-ch-ua']:
         # Verificar si el navegador es Google Chrome para acceder a la ubicación.
         if request.headers.get('sec-ch-ua-mobile') != '?0':
             # Si el dispositivo es móvil y el usuario ha permitido el acceso a la ubicación.
-            return enviar_ubicacion()
+
+            # Obtener la ubicación del dispositivo a través de JSON
+            datos = request.get_json()
+            latitud = datos['latitud']
+            longitud = datos['longitud']
+            print(latitud)
+            print(longitud)
+
+            return enviar_ubicacion(latitud, longitud)
         else:
             # Si el dispositivo es una computadora y se requiere acceso a la ubicación.
             return render_template('solicitar_permiso.html')
@@ -41,11 +49,12 @@ def mi_funcion():
         # Si el navegador no es Google Chrome, el usuario no puede compartir su ubicación.
         return "Lo siento, esta función solo está disponible en Google Chrome."
 
-@app.route("/permiso")
-def permiso():
+
+@app.route('/solicitud')
+def solicitud():
     return render_template('solicitar_permiso.html')
 
 
 # hacer la app accesible desde el puerto  en la red local
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    app.run(debug=True)
