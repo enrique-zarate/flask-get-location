@@ -1,9 +1,10 @@
 from twilio.rest import Client
 from flask import request
+import os
 
 # Datos de la cuenta de Twilio
-account_sid = 'AC702d052c1ddbfdef80e6d43e902129cd'
-auth_token = '104a39c7a1546d55b505498024b458e6'
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 
 def enviar_ubicacion():
