@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Solicitud de permisos de ubicación</title>
+  </head>
+  <body>
+    <h1>Solicitud de permisos de ubicación</h1>
+    <p>
+      Para compartir tu ubicación, debes permitir que este sitio web acceda a tu
+      ubicación. Haz clic en el botón de abajo para permitir el acceso:
+    </p>
+    <button onclick="pedir_permisos()">Permitir acceso a ubicación</button>
+    <script>
+      function pedir_permisos() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(ubicacion_exitosa);
+        } else {
+          alert("Tu navegador no soporta geolocalización.");
+        }
+      }
+      function ubicacion_exitosa(posicion) {
+        window.location.href = "/mi_ruta";
+      }
+    </script>
+  </body>
+</html>
