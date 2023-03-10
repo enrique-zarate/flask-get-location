@@ -7,3 +7,4 @@ MarkupSafe==2.1.2
 Werkzeug==2.2.3
 zipp==3.15.0
 twilio==7.16.5
+python-dotenv==1.0.0
